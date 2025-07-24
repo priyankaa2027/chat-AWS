@@ -38,6 +38,7 @@ const config: AmplifyConfig = {
 };
 
 // Configure token signing for WebSocket connections
+// Add 'clear' method to satisfy KeyValueStorageInterface
 cognitoUserPoolsTokenProvider.setKeyValueStorage({
   setItem: async (key: string, value: string) => {
     sessionStorage.setItem(key, value);
@@ -47,6 +48,9 @@ cognitoUserPoolsTokenProvider.setKeyValueStorage({
   },
   removeItem: async (key: string) => {
     sessionStorage.removeItem(key);
+  },
+  clear: async () => {
+    sessionStorage.clear();
   },
 });
 
